@@ -1,6 +1,10 @@
 package org.stockHelper.entities;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Stock {
@@ -15,10 +19,17 @@ public class Stock {
     @Column
     private String ticker;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL)
+    private List<Client_Stock> clientStocks;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id", referencedColumnName = "id")
-    private Client client;
+    public List<Client_Stock> getClientStocks() {
+        return clientStocks;
+    }
+
+    public void setClientStocks(List<Client_Stock> clientStocks) {
+        this.clientStocks = clientStocks;
+    }
 
     public Long getId() {
         return id;
@@ -44,11 +55,4 @@ public class Stock {
         this.ticker = ticker;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
 }

@@ -30,7 +30,7 @@ public class Client {
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Stock> stockList;
+    private List<Client_Stock> stockList;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
@@ -61,11 +61,11 @@ public class Client {
         this.password = password;
     }
 
-    public List<Stock> getStockList() {
+    public List<Client_Stock> getStockList() {
         return stockList;
     }
 
-    public void setStockList(List<Stock> stockList) {
+    public void setStockList(List<Client_Stock> stockList) {
         this.stockList = stockList;
     }
 
